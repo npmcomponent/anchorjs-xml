@@ -15,7 +15,9 @@
     "url": "http://www.opensource.org/licenses/MIT" 
   } ],
   "main": "main",
-  "amd": {},
+  "amd": {
+    "baseUrl": "."
+  },
   "volo": {
     "x-dependencies": {
       "anchor": "anchorjs/anchor"
