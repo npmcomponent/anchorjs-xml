@@ -1,28 +1,12 @@
-define(function() {
-  
-  var generator;
+define(['./lib/document',
+        './lib/utils'],
+function(Document, utils) {
   
   function xml(name, attrs) {
-    if (!generator) { init(); }
-    
-    var doc = generator.createElement(name);
-    return doc;
+    return new Document(name, attrs);
   }
   
-  xml.stringify = function(node) {
-    var s = new XMLSerializer();
-    return s.serializeToString(node);
-  }
-  
-  
-  function init() {
-    if (window.ActiveXObject) {
-      generator = new ActiveXObject("Microsoft.XMLDOM");
-      generator.appendChild(doc.createElement('document'));
-    } else {
-      generator = document.implementation.createDocument('http://xml.anchorjs.org', 'document', null);
-    }
-  }
+  xml.stringify = utils.stringify;
   
   return xml;
 });

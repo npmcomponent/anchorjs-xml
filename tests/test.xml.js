@@ -1,7 +1,8 @@
 define(['xml/main',
+        'xml/lib/document',
         'chai'],
 
-function(xml, chai) {
+function(xml, Document, chai) {
   var expect = chai.expect;
 
   describe("xml", function() {
@@ -17,13 +18,11 @@ function(xml, chai) {
     describe('create with name', function() {
       var doc = xml('html');
       
-      it('should be an instance of Element', function() {
-        expect(doc).to.be.an.instanceOf(Node);
-        expect(doc).to.be.an.instanceOf(Element);
+      it('should be an instance of Document', function() {
+        expect(doc).to.be.an.instanceOf(Document);
       });
       it('should serialize to string', function() {
-        var str = xml.stringify(doc);
-        expect(str).to.be.equal('<html/>');
+        expect(doc.toString()).to.be.equal('<html/>');
       });
     });
     
