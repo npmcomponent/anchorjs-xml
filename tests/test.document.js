@@ -9,6 +9,9 @@ function(Document, chai) {
     it('should alias root to tree', function() {
       expect(Document.prototype.root).to.be.equal(Document.prototype.tree);
     });
+    it('should alias t to text', function() {
+      expect(Document.prototype.t).to.be.equal(Document.prototype.text);
+    });
     it('should alias attr to attrs', function() {
       expect(Document.prototype.attr).to.be.equal(Document.prototype.attrs);
     });
@@ -46,6 +49,21 @@ function(Document, chai) {
       });
       it('should set current node to child', function() {
         expect(doc._node.nodeName).to.be.equal('child');
+      });
+    });
+    
+    describe('t', function() {
+      var doc = new Document('root')
+      var rv = doc.c('child').t('hello');
+    
+      it('should return document', function() {
+        expect(rv).to.be.equal(doc);
+      });
+      it('should leave current node at child', function() {
+        expect(doc._node.nodeName).to.be.equal('child');
+      });
+      it('should serialize with text', function() {
+        expect(doc.toString()).to.be.equal('<child>hello</child>');
       });
     });
     
