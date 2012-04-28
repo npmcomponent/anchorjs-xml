@@ -14,7 +14,8 @@ require(['require',
 function(require, _mocha, _chai) {
   mocha.setup('bdd');
   
-  require(['test.xml'],
+  require(['test.xml',
+           'test.factory'],
   function() {
     mocha.run();
   });
