@@ -102,6 +102,9 @@ function(Document, Element, chai) {
       it('should leave current node at child', function() {
         expect(doc._node.nodeName).to.be.equal('child');
       });
+      it('should get text', function() {
+        expect(rv.t()).to.be.equal('hello');
+      });
       it('should serialize with text', function() {
         expect(doc.toString()).to.be.equal('<child>hello</child>');
       });
