@@ -10,6 +10,42 @@ function(Document, chai) {
       expect(Document.prototype.root).to.be.equal(Document.prototype.tree);
     });
     
+    describe('root', function() {
+      var doc = new Document('root')
+      var rv = doc.c('child').c('grandchild').root();
+    
+      it('should return document', function() {
+        expect(rv).to.be.equal(doc);
+      });
+      it('should set current node to root', function() {
+        expect(doc._root).to.be.equal(doc._node);
+      });
+    });
+    
+    describe('up', function() {
+      var doc = new Document('root')
+      var rv = doc.c('child').c('grandchild').up();
+    
+      it('should return document', function() {
+        expect(rv).to.be.equal(doc);
+      });
+      it('should set current node to parent', function() {
+        expect(doc._node.nodeName).to.be.equal('child');
+      });
+    });
+    
+    describe('c', function() {
+      var doc = new Document('root')
+      var rv = doc.c('child');
+    
+      it('should return document', function() {
+        expect(rv).to.be.equal(doc);
+      });
+      it('should set current node to child', function() {
+        expect(doc._node.nodeName).to.be.equal('child');
+      });
+    });
+    
     describe('create two children and serialize', function() {
       var doc = new Document('root')
       
@@ -23,6 +59,17 @@ function(Document, chai) {
       
       it('should serialize the last child', function() {
         expect(doc.c('x').c('y').root().toString()).to.be.equal('<root><x><y/></x></root>');
+      });
+    });
+    
+    describe('create IQ with xmlns as attribute', function() {
+      var iq = new Document('iq', { type: 'result', from: 'plays.shakespeare.lit', to: 'romeo@montague.net/orchard' })
+        .c('query', { xmlns: 'http://jabber.org/protocol/disco#info' })
+        .c('feature', { 'var': 'http://jabber.org/protocol/disco#info' })
+        .root();
+      
+      it('should serialize the last child', function() {
+        expect(iq.toString()).to.be.equal('<iq type="result" from="plays.shakespeare.lit" to="romeo@montague.net/orchard"><query xmlns="http://jabber.org/protocol/disco#info"><feature var="http://jabber.org/protocol/disco#info"/></query></iq>');
       });
     });
     
