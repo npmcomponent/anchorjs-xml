@@ -1,7 +1,8 @@
 define(['xml/lib/document',
+        'xml/lib/element',
         'chai'],
 
-function(Document, chai) {
+function(Document, Element, chai) {
   var expect = chai.expect;
 
   describe("Document", function() {
@@ -40,6 +41,42 @@ function(Document, chai) {
       });
       it('should set current node to parent', function() {
         expect(doc._node.nodeName).to.be.equal('child');
+      });
+    });
+    
+    describe('children', function() {
+      
+      describe('without namespaces', function() {
+        var doc = new Document('root')
+          .c('child1').text('foo').up()
+          .c('child1').text('bar').up()
+          .c('child2').text('baz').up()
+          .root();
+        var child = doc.child('child1');
+        var children = doc.children('child1');
+    
+        it('child should be correct', function() {
+          expect(child).to.be.an.instanceOf(Element);
+          expect(child._node.nodeName).to.be.equal('child1');
+          expect(child.text()).to.be.equal('foo');
+        });
+    
+        it('children should return an array', function() {
+          expect(children).to.be.an.instanceOf(Array);
+        });
+        it('children should return two children', function() {
+          expect(children).to.have.length(2);
+        });
+        it('first child should be correct', function() {
+          expect(children[0]).to.be.an.instanceOf(Element);
+          expect(children[0]._node.nodeName).to.be.equal('child1');
+          expect(children[0].text()).to.be.equal('foo');
+        });
+        it('second child should be correct', function() {
+          expect(children[1]).to.be.an.instanceOf(Element);
+          expect(children[1]._node.nodeName).to.be.equal('child1');
+          expect(children[1].text()).to.be.equal('bar');
+        });
       });
     });
     
