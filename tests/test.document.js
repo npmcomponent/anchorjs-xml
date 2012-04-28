@@ -9,6 +9,9 @@ function(Document, chai) {
     it('should alias root to tree', function() {
       expect(Document.prototype.root).to.be.equal(Document.prototype.tree);
     });
+    it('should alias attr to attrs', function() {
+      expect(Document.prototype.attr).to.be.equal(Document.prototype.attrs);
+    });
     
     describe('root', function() {
       var doc = new Document('root')
@@ -44,6 +47,47 @@ function(Document, chai) {
       it('should set current node to child', function() {
         expect(doc._node.nodeName).to.be.equal('child');
       });
+    });
+    
+    describe('attr', function() {
+      
+      describe('set with name and value', function() {
+        var doc = new Document('root')
+        var rv = doc.c('child').attr('foo', 'bar');
+    
+        it('should return document', function() {
+          expect(rv).to.be.equal(doc);
+        });
+        it('should leave current node at child', function() {
+          expect(doc._node.nodeName).to.be.equal('child');
+        });
+        it('should get attribute', function() {
+          expect(doc.attr('foo')).to.be.equal('bar');
+        });
+        it('should serialize with attributes', function() {
+          expect(doc.toString()).to.be.equal('<child foo="bar"/>');
+        });
+      });
+      
+      describe('set with object', function() {
+        var doc = new Document('root')
+        var rv = doc.c('child').attr({ foo1: 'bar1', foo2: 'bar2' });
+    
+        it('should return document', function() {
+          expect(rv).to.be.equal(doc);
+        });
+        it('should leave current node at child', function() {
+          expect(doc._node.nodeName).to.be.equal('child');
+        });
+        it('should get attribute', function() {
+          expect(doc.attr('foo1')).to.be.equal('bar1');
+          expect(doc.attr('foo2')).to.be.equal('bar2');
+        });
+        it('should serialize with attributes', function() {
+          expect(doc.toString()).to.be.equal('<child foo1="bar1" foo2="bar2"/>');
+        });
+      });
+      
     });
     
     describe('create two children and serialize', function() {
