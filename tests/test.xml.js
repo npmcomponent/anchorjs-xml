@@ -11,6 +11,10 @@ function(xml, Document, chai) {
       expect(xml).to.be.a('function');
     });
     
+    it('should have a parse function', function() {
+      expect(xml.parse).to.be.a('function');
+    });
+    
     it('should have a stringify function', function() {
       expect(xml.stringify).to.be.a('function');
     });

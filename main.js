@@ -26,6 +26,7 @@ function(Document, utils) {
   /**
    * Expose utilities.
    */
+  xml.parse = utils.parse;
   xml.stringify = utils.stringify;
   
   return xml;
