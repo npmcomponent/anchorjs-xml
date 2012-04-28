@@ -48,7 +48,7 @@ function(Document, Element, chai) {
       
       describe('without namespaces', function() {
         var doc = new Document('root')
-          .c('child1').text('foo').up()
+          .c('child1').attr('foo', 'bar').text('foo').up()
           .c('child1').text('bar').up()
           .c('child2').text('baz').up()
           .root();
@@ -58,6 +58,7 @@ function(Document, Element, chai) {
         it('child should be correct', function() {
           expect(child).to.be.an.instanceOf(Element);
           expect(child._node.nodeName).to.be.equal('child1');
+          expect(child.attr('foo')).to.be.equal('bar');
           expect(child.text()).to.be.equal('foo');
         });
     

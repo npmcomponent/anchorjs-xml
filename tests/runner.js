@@ -16,6 +16,7 @@ function(require, _mocha, _chai) {
   
   require(['test.xml',
            'test.document',
+           'test.element',
            'test.factory',
            'test.utils'],
   function() {
