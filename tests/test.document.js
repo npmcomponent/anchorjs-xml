@@ -9,6 +9,9 @@ function(Document, chai) {
     it('should alias root to tree', function() {
       expect(Document.prototype.root).to.be.equal(Document.prototype.tree);
     });
+    it('should alias c to append', function() {
+      expect(Document.prototype.c).to.be.equal(Document.prototype.append);
+    });
     it('should alias t to text', function() {
       expect(Document.prototype.t).to.be.equal(Document.prototype.text);
     });
