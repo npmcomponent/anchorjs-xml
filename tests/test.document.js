@@ -64,6 +64,13 @@ function(Document, Element, chai) {
             expect(child.attr('foo')).to.be.equal('bar');
             expect(child.text()).to.be.equal('foo');
           });
+          it('should check child name', function() {
+            expect(child.is('child1')).to.be.true;
+            expect(child.is('not-child1')).to.be.false;
+            expect(child.is('not', 'child1')).to.be.false;
+            expect(child.ns()).to.be.equal(null);
+            expect(child.name()).to.be.equal('child1');
+          });
         });
         
         describe('query children', function() {
@@ -112,6 +119,16 @@ function(Document, Element, chai) {
             expect(children[2].text()).to.be.equal('baz');
             expect(children[3].text()).to.be.equal('lorem');
           });
+          it('should check child name', function() {
+            var child = children[0];
+            
+            expect(child.is('child1')).to.be.true;
+            expect(child.is('not-child1')).to.be.false;
+            expect(child.is('ns1', 'child1')).to.be.true;
+            expect(child.is('not', 'child1')).to.be.false;
+            expect(child.ns()).to.be.equal('ns1');
+            expect(child.name()).to.be.equal('child1');
+          });
         });
         
         describe('query using namespaces', function() {
@@ -153,6 +170,16 @@ function(Document, Element, chai) {
             expect(children[1].text()).to.be.equal('bar');
             expect(children[2].text()).to.be.equal('baz');
             expect(children[3].text()).to.be.equal('lorem');
+          });
+          it('should check child name', function() {
+            var child = children[0];
+            
+            expect(child.is('child1')).to.be.true;
+            expect(child.is('not-child1')).to.be.false;
+            expect(child.is('ns1', 'child1')).to.be.true;
+            expect(child.is('not', 'child1')).to.be.false;
+            expect(child.ns()).to.be.equal('ns1');
+            expect(child.name()).to.be.equal('child1');
           });
         });
         
