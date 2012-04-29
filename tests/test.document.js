@@ -52,33 +52,126 @@ function(Document, Element, chai) {
           .c('child1').text('bar').up()
           .c('child2').text('baz').up()
           .root();
-        var child = doc.child('child1');
-        var children = doc.children('child1');
-    
-        it('child should be correct', function() {
-          expect(child).to.be.an.instanceOf(Element);
-          expect(child._node.nodeName).to.be.equal('child1');
-          expect(child.attr('foo')).to.be.equal('bar');
-          expect(child.text()).to.be.equal('foo');
+        
+        describe('query child', function() {
+          var child = doc.child('child1');
+          
+          it('should return an Element', function() {
+            expect(child).to.be.an.instanceOf(Element);
+          });
+          it('should return first child', function() {
+            expect(child._node.nodeName).to.be.equal('child1');
+            expect(child.attr('foo')).to.be.equal('bar');
+            expect(child.text()).to.be.equal('foo');
+          });
         });
-    
-        it('children should return an array', function() {
-          expect(children).to.be.an.instanceOf(Array);
-        });
-        it('children should return two children', function() {
-          expect(children).to.have.length(2);
-        });
-        it('first child should be correct', function() {
-          expect(children[0]).to.be.an.instanceOf(Element);
-          expect(children[0]._node.nodeName).to.be.equal('child1');
-          expect(children[0].text()).to.be.equal('foo');
-        });
-        it('second child should be correct', function() {
-          expect(children[1]).to.be.an.instanceOf(Element);
-          expect(children[1]._node.nodeName).to.be.equal('child1');
-          expect(children[1].text()).to.be.equal('bar');
+        
+        describe('query children', function() {
+          var children = doc.children('child1');
+          
+          it('should return an array', function() {
+            expect(children).to.be.an.instanceOf(Array);
+          });
+          it('should return two elements in array', function() {
+            expect(children).to.have.length(2);
+          });
+          it('should return first child', function() {
+            expect(children[0]).to.be.an.instanceOf(Element);
+            expect(children[0]._node.nodeName).to.be.equal('child1');
+            expect(children[0].text()).to.be.equal('foo');
+          });
+          it('should return second child', function() {
+            expect(children[1]).to.be.an.instanceOf(Element);
+            expect(children[1]._node.nodeName).to.be.equal('child1');
+            expect(children[1].text()).to.be.equal('bar');
+          });
         });
       });
+      
+      describe('with namespaces', function() {
+        var doc = new Document('root')
+          .c('ns1', 'child1').attr('foo', 'bar').text('foo').up()
+          .c('ns2', 'child1').text('bar').up()
+          .c('ns3', 'child').text('ipsum').up()
+          .c('ns1', 'child1').text('baz').up()
+          .c('ns2', 'child1').text('lorem').up()
+          .root();
+          
+        describe('query ignoring namespaces', function() {
+          var children = doc.children('child1');
+          
+          it('children should return an array', function() {
+            expect(children).to.be.an.instanceOf(Array);
+          });
+          it('children should return four children', function() {
+            expect(children).to.have.length(4);
+          });
+          it('should return correct children', function() {
+            expect(children[0].text()).to.be.equal('foo');
+            expect(children[1].text()).to.be.equal('bar');
+            expect(children[2].text()).to.be.equal('baz');
+            expect(children[3].text()).to.be.equal('lorem');
+          });
+        });
+        
+        describe('query using namespaces', function() {
+          var children = doc.children('ns2', 'child1');
+          
+          it('children should return an array', function() {
+            expect(children).to.be.an.instanceOf(Array);
+          });
+          it('children should return two children', function() {
+            expect(children).to.have.length(2);
+          });
+          it('should return correct children', function() {
+            expect(children[0].text()).to.be.equal('bar');
+            expect(children[1].text()).to.be.equal('lorem');
+          });
+        });
+      });
+      
+      describe('with namespaces from attributes', function() {
+        var doc = new Document('root')
+          .c('child1', { xmlns: 'ns1' }).attr('foo', 'bar').text('foo').up()
+          .c('child1', { xmlns: 'ns2' }).text('bar').up()
+          .c('child', { xmlns: 'ns3' }).text('ipsum').up()
+          .c('child1', { xmlns: 'ns1' }).text('baz').up()
+          .c('child1', { xmlns: 'ns2' }).text('lorem').up()
+          .root();
+          
+        describe('query ignoring namespaces', function() {
+          var children = doc.children('child1');
+          
+          it('children should return an array', function() {
+            expect(children).to.be.an.instanceOf(Array);
+          });
+          it('children should return four children', function() {
+            expect(children).to.have.length(4);
+          });
+          it('should return correct children', function() {
+            expect(children[0].text()).to.be.equal('foo');
+            expect(children[1].text()).to.be.equal('bar');
+            expect(children[2].text()).to.be.equal('baz');
+            expect(children[3].text()).to.be.equal('lorem');
+          });
+        });
+        
+        describe('query using namespaces', function() {
+          var children = doc.children('ns2', 'child1');
+          
+          it('children should return an array', function() {
+            expect(children).to.be.an.instanceOf(Array);
+          });
+          it('children should return two children', function() {
+            expect(children).to.have.length(2);
+          });
+          it('should return correct children', function() {
+            expect(children[0].text()).to.be.equal('bar');
+            expect(children[1].text()).to.be.equal('lorem');
+          });
+        });
+      });
+      
     });
     
     describe('c', function() {
