@@ -70,6 +70,33 @@ function(xml, Document, chai) {
       });
     });
     
+    describe('create with DOM document', function() {
+      var x = xml('doc');
+      var el = x._node.ownerDocument;
+      var docEl = el.documentElement;
+      var doc = xml(el);
+      
+      it('should set root to element', function() {
+        expect(doc._root).to.be.equal(docEl);
+      });
+      it('should serialize to string', function() {
+        expect(doc.toString()).to.be.equal('<document xmlns="http://xml.anchorjs.org"/>');
+      });
+    });
+    
+    describe('create with DOM element', function() {
+      var x = xml('xml');
+      var el = x._node;
+      var doc = xml(el);
+      
+      it('should set root to element', function() {
+        expect(doc._root).to.be.equal(el);
+      });
+      it('should serialize to string', function() {
+        expect(doc.toString()).to.be.equal('<xml/>');
+      });
+    });
+    
   });
   
   return { name: "test.xml" }
