@@ -25,6 +25,12 @@ function(xml, Document, chai) {
       it('should be an instance of Document', function() {
         expect(doc).to.be.an.instanceOf(Document);
       });
+      it('should query name and ns', function() {
+        expect(doc.ns()).to.be.equal(null);
+        expect(doc.name()).to.be.equal('html');
+        expect(doc.is('html')).to.be.true;
+        expect(doc.is('http://www.w3.org/1999/xhtml', 'html')).to.be.false;
+      });
       it('should serialize to string', function() {
         expect(doc.toString()).to.be.equal('<html/>');
       });
@@ -38,9 +44,29 @@ function(xml, Document, chai) {
       });
     });
     
+    describe('create with name and xmlns attribute', function() {
+      var doc = xml('message', { xmlns: 'jabber:client' });
+      
+      it('should query name and ns', function() {
+        expect(doc.ns()).to.be.equal('jabber:client');
+        expect(doc.name()).to.be.equal('message');
+        expect(doc.is('message')).to.be.true;
+        expect(doc.is('jabber:client', 'message')).to.be.true;
+      });
+      it('should serialize to string', function() {
+        expect(doc.toString()).to.be.equal('<message xmlns="jabber:client"/>');
+      });
+    });
+    
     describe('create with ns and name', function() {
       var doc = xml('http://www.w3.org/1999/xhtml', 'html');
       
+      it('should query name and ns', function() {
+        expect(doc.ns()).to.be.equal('http://www.w3.org/1999/xhtml');
+        expect(doc.name()).to.be.equal('html');
+        expect(doc.is('html')).to.be.true;
+        expect(doc.is('http://www.w3.org/1999/xhtml', 'html')).to.be.true;
+      });
       it('should serialize to string', function() {
         expect(doc.toString()).to.be.equal('<html xmlns="http://www.w3.org/1999/xhtml"></html>');
       });
