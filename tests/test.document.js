@@ -93,6 +93,17 @@ function(Document, Element, chai) {
             expect(children[1].text()).to.be.equal('bar');
           });
         });
+        
+        describe('query all children', function() {
+          var children = doc.children();
+          
+          it('should return an array', function() {
+            expect(children).to.be.an.instanceOf(Array);
+          });
+          it('should return three elements in array', function() {
+            expect(children).to.have.length(3);
+          });
+        });
       });
       
       describe('with namespaces', function() {
