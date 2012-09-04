@@ -12,11 +12,7 @@ require(['require',
 function(require, _mocha, _chai) {
   mocha.setup('bdd');
   
-  require(['test.xml',
-           'test.document',
-           'test.element',
-           'test.factory',
-           'test.utils'],
+  require(['suite'],
   function() {
     mocha.run();
   });
