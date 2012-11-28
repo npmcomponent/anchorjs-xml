@@ -67,7 +67,7 @@ function(Document, Element, chai) {
           it('should check child name', function() {
             expect(child.is('child1')).to.be.true;
             expect(child.is('not-child1')).to.be.false;
-            expect(child.is('not', 'child1')).to.be.false;
+            expect(child.is('child1', 'not')).to.be.false;
             expect(child.ns()).to.be.equal(null);
             expect(child.name()).to.be.equal('child1');
           });
@@ -286,7 +286,7 @@ function(Document, Element, chai) {
     describe('create two children and serialize', function() {
       var doc = new Document('root')
       
-      it('should serialize the last child', function() {
+      it('should serialize correctly', function() {
         expect(doc.c('x').c('y').toString()).to.be.equal('<y/>');
       });
     });
@@ -294,7 +294,7 @@ function(Document, Element, chai) {
     describe('create two children, root and serialize', function() {
       var doc = new Document('root')
       
-      it('should serialize the last child', function() {
+      it('should serialize correctly', function() {
         expect(doc.c('x').c('y').root().toString()).to.be.equal('<root><x><y/></x></root>');
       });
     });
@@ -305,7 +305,7 @@ function(Document, Element, chai) {
         .c('feature', { 'var': 'http://jabber.org/protocol/disco#info' })
         .root();
       
-      it('should serialize the last child', function() {
+      it('should serialize correctly', function() {
         expect(iq.toString()).to.be.equal('<iq type="result" from="plays.shakespeare.lit" to="romeo@montague.net/orchard"><query xmlns="http://jabber.org/protocol/disco#info"><feature var="http://jabber.org/protocol/disco#info"/></query></iq>');
       });
     });

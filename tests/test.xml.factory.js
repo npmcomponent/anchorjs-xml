@@ -1,6 +1,5 @@
 define(['xml/lib/factory',
         'chai'],
-
 function(factory, chai) {
   var expect = chai.expect;
 

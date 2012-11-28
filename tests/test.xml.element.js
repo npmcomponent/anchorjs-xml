@@ -1,6 +1,5 @@
 define(['xml/lib/element',
         'chai'],
-
 function(Element, chai) {
   var expect = chai.expect;
 
