@@ -1,6 +1,7 @@
-define(['./lib/document',
+define(['exports', 'module',
+        './lib/document',
         './lib/utils'],
-function(Document, utils) {
+function(exports, module, Document, utils) {
   
   /**
    * Returns an XML document with usable building and traversing functions.
@@ -23,11 +24,15 @@ function(Document, utils) {
     return new Document(ns, name, attrs);
   }
   
+  
+  /**
+   * Expose document factory.
+   */
+  exports = module.exports = xml;
+  
   /**
    * Expose utilities.
    */
-  xml.parse = utils.parse;
-  xml.stringify = utils.stringify;
-  
-  return xml;
+  exports.parse = utils.parse;
+  exports.stringify = utils.stringify;
 });
