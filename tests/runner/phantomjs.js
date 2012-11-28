@@ -1,10 +1,12 @@
 require.config({
   paths:{
-    'xml': '../../',
     'mocha': '../vendor/mocha/mocha',
-    'chai': '../vendor/chai/chai',
-    'phantomjs-mocha': '../vendor/phantomjs-mocha'
-  }
+    'chai': '../vendor/chai/chai'
+  },
+  packages: [
+    { name: 'xml', location: '../..' },
+    { name: 'phantomjs-mocha', location: '../vendor/phantomjs-mocha' }
+  ]
 });
 
 require(['require',

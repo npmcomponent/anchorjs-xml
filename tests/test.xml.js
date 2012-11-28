@@ -1,4 +1,4 @@
-define(['xml/main',
+define(['xml',
         'xml/lib/document',
         'chai'],
 

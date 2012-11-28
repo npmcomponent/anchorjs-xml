@@ -1,9 +1,11 @@
 require.config({
   paths:{
-    'xml': '../',
     'mocha': 'vendor/mocha/mocha',
     'chai': 'vendor/chai/chai'
-  }
+  },
+  packages: [
+    { name: 'xml', location: '..' },
+  ]
 });
 
 require(['require',
