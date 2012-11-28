@@ -108,11 +108,11 @@ function(Document, Element, chai) {
       
       describe('with namespaces', function() {
         var doc = new Document('root')
-          .c('ns1', 'child1').attr('foo', 'bar').text('foo').up()
-          .c('ns2', 'child1').text('bar').up()
-          .c('ns3', 'child').text('ipsum').up()
-          .c('ns1', 'child1').text('baz').up()
-          .c('ns2', 'child1').text('lorem').up()
+          .c('child1', 'ns1').attr('foo', 'bar').text('foo').up()
+          .c('child1', 'ns2').text('bar').up()
+          .c('child', 'ns3').text('ipsum').up()
+          .c('child1', 'ns1').text('baz').up()
+          .c('child1', 'ns2').text('lorem').up()
           .root();
           
         describe('query ignoring namespaces', function() {
@@ -135,15 +135,15 @@ function(Document, Element, chai) {
             
             expect(child.is('child1')).to.be.true;
             expect(child.is('not-child1')).to.be.false;
-            expect(child.is('ns1', 'child1')).to.be.true;
-            expect(child.is('not', 'child1')).to.be.false;
+            expect(child.is('child1', 'ns1')).to.be.true;
+            expect(child.is('child1', 'not')).to.be.false;
             expect(child.ns()).to.be.equal('ns1');
             expect(child.name()).to.be.equal('child1');
           });
         });
         
         describe('query using namespaces', function() {
-          var children = doc.children('ns2', 'child1');
+          var children = doc.children('child1', 'ns2');
           
           it('children should return an array', function() {
             expect(children).to.be.an.instanceOf(Array);
@@ -187,15 +187,15 @@ function(Document, Element, chai) {
             
             expect(child.is('child1')).to.be.true;
             expect(child.is('not-child1')).to.be.false;
-            expect(child.is('ns1', 'child1')).to.be.true;
-            expect(child.is('not', 'child1')).to.be.false;
+            expect(child.is('child1', 'ns1')).to.be.true;
+            expect(child.is('child1', 'not')).to.be.false;
             expect(child.ns()).to.be.equal('ns1');
             expect(child.name()).to.be.equal('child1');
           });
         });
         
         describe('query using namespaces', function() {
-          var children = doc.children('ns2', 'child1');
+          var children = doc.children('child1', 'ns2');
           
           it('children should return an array', function() {
             expect(children).to.be.an.instanceOf(Array);
