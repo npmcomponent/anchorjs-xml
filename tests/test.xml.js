@@ -88,6 +88,28 @@ function(xml, Document, chai) {
       });
     });
     
+    describe('create with qalified name and ns and default xmlns attribute', function() {
+      var doc = xml('stream:features', 'http://etherx.jabber.org/streams', { xmlns: 'jabber:client' });
+      
+      it('should serialize to string', function() {
+        expect(doc.toString()).to.be.equal('<stream:features xmlns:stream="http://etherx.jabber.org/streams" xmlns="jabber:client"/>');
+      });
+      it('should query name and ns', function() {
+        expect(doc.ns()).to.be.equal('http://etherx.jabber.org/streams');
+        expect(doc.name()).to.be.equal('features');
+        expect(doc.is('features', 'http://etherx.jabber.org/streams')).to.be.true;
+      });
+      it('should set nodeName correctly', function() {
+        expect(doc._node.nodeName).to.be.equal('stream:features');
+      });
+      it('should set localName correctly', function() {
+        expect(doc._node.localName).to.be.equal('features');
+      });
+      it('should set namespaceURI correctly', function() {
+        expect(doc._node.namespaceURI).to.be.equal('http://etherx.jabber.org/streams');
+      });
+    });
+    
     describe('create with qualified name, ns, and attributes', function() {
       var doc = xml('xhtml:div', 'http://www.w3.org/1999/xhtml', { id: 'foo' });
       
