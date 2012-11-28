@@ -312,5 +312,5 @@ function(Document, Element, chai) {
     
   });
   
-  return { name: "test.document" }
+  return { name: "test.xml.document" }
 });

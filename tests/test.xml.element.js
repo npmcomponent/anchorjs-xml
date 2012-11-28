@@ -16,5 +16,5 @@ function(Element, chai) {
     
   });
   
-  return { name: "test.element" }
+  return { name: "test.xml.element" }
 });

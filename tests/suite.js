@@ -1,8 +1,8 @@
 define(['./test.xml',
-        './test.document',
-        './test.element',
-        './test.factory',
-        './test.utils'],
+        './test.xml.document',
+        './test.xml.element',
+        './test.xml.factory',
+        './test.xml.utils'],
 function() {
   return {}
 });

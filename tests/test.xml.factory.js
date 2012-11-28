@@ -12,5 +12,5 @@ function(factory, chai) {
     
   });
   
-  return { name: "test.factory" }
+  return { name: "test.xml.factory" }
 });
