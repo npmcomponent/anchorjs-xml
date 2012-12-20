@@ -29,6 +29,8 @@ function(exports, module, Document, utils) {
    * Expose document factory.
    */
   exports = module.exports = xml;
+  exports.Document = Document;
+  
   
   /**
    * Expose utilities.
