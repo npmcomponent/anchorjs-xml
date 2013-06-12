@@ -1,9 +1,6 @@
 define(['xml/lib/document',
-        'xml/lib/element',
-        'chai'],
-
-function(Document, Element, chai) {
-  var expect = chai.expect;
+        'xml/lib/element'],
+function(Document, Element) {
 
   describe("Document", function() {
     

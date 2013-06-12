@@ -1,7 +1,5 @@
-define(['xml/lib/utils',
-        'chai'],
+define(['xml/lib/utils'],
 function(utils, chai) {
-  var expect = chai.expect;
 
   describe("utils", function() {
     
