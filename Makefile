@@ -6,7 +6,7 @@ TESTS = test/*.test.js
 # ==============================================================================
 
 build-browserify:
-	browserify -t deamdify class.js -o bundle.js
+	browserify -t deamdify main.js -o bundle.js
 
 
 # ==============================================================================
