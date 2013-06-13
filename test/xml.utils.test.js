@@ -1,5 +1,5 @@
 define(['xml/lib/utils'],
-function(utils, chai) {
+function(utils) {
 
   describe("utils", function() {
     

@@ -1,5 +1,5 @@
 define(['xml/lib/factory'],
-function(factory, chai) {
+function(factory) {
 
   describe("factory", function() {
     
