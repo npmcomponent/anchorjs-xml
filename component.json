@@ -9,7 +9,7 @@
     "lib/document.js",
     "lib/element.js",
     "lib/factory.js",
-    "lib/util.js"
+    "lib/utils.js"
   ],
   "license": "MIT"
 }
